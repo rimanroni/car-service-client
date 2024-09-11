@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+body {
+    font-family: "Inter", sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#item1{
+    background-image: linear-gradient( 90deg, #151515 0%, rgba(21, 21, 21, 0.00) 100%), url('/assets/images/homeCarousel/1.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center
+ }
+ #item2{
+    background-image: linear-gradient( 90deg, #151515 0%, rgba(21, 21, 21, 0.00) 100%), url('/assets/images/homeCarousel/2.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center
+  }
+ #item3{
+    background-image: linear-gradient( 90deg, #151515 0%, rgba(21, 21, 21, 0.00) 100%), url('/assets/images/homeCarousel/3.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center
+  }
+ #item4{
+    background-image: linear-gradient( 90deg, #151515 0%, rgba(21, 21, 21, 0.00) 100%), url('/assets/images/homeCarousel/4.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .swiper-button-next::after, 
+.swiper-button-prev::after{
+    color: blue;  
+} 
+
+#bannerDetails{
+  background-image: linear-gradient( 90deg, #151515 0%, rgba(21, 21, 21, 0.00) 100%), url('/assets/images/checkout/checkout.png') ;
+  height: 300px;
+  margin-top: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center
+}
+
+#videoBanner{
+  background-image: url('/assets/images/banner/2.jpg');
+  background-size: cover;
+  cursor: pointer;
+  margin-top: 10px;
+  background-position-x: cover;
+  background-position-y: cover;
+}
