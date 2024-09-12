@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { myContaxt } from "../../../contaxt/Contaxt";
 import moment from "moment";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const CheckOut = () => {
@@ -25,7 +26,13 @@ const CheckOut = () => {
         .then(res=>{
            const id = res.data.insertedId;
            if(id){
-            alert('product add done')
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Order  Successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
             form.reset()
            }
         })

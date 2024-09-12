@@ -1,10 +1,11 @@
  
 import { MdPassword } from 'react-icons/md';
 import SocialAuth from '../SocialAuth/SocialAuth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MainNav from '../../shared/Navbar/MainNav';
 import { useContext, useState } from 'react';
 import { myContaxt } from '../../../contaxt/Contaxt';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [type, setType] = useState(false);
@@ -12,16 +13,31 @@ const Login = () => {
     const handleType = () =>{
         setType(!type)
     }
+     const location = useLocation();
+      const navigate = useNavigate()
     const handleForm = (e) =>{
       e.preventDefault();
       const form = e.target;
       const email = form.email.value;
       const password = form.password.value;
       loginUser(email, password)
-      .then(res=>alert('log in done'))
+      .then(res=>{
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log in Successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate(location?.state ? location?.state : '/')
+      })
       .catch(error=>{
-        alert('invalid user ')
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "email or password wrong !",
+           
+        });
       })
      }
     return ( 

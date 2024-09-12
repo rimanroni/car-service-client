@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainNav from '../../shared/Navbar/MainNav';
 import { useLoaderData } from 'react-router-dom';
 import { ImCross } from 'react-icons/im';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Pending = () => {
-    const data = useLoaderData()
+    const datas = useLoaderData();
+    const [data, setData] = useState(datas)
+  
     const updateData = (id, updatedOrder) => {
         axios.put(`http://localhost:4000/order/${id}`, updatedOrder)
           .then(res => {
@@ -16,6 +19,42 @@ const Pending = () => {
           })
           .catch(error => console.log(error));
       };
+      const deletOrder = (id) => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .delete(`http://localhost:4000/order/${id}`)
+              .then((res) => {
+                const delet = res.data.deletedCount;
+                if (delet == 1) {
+                  const newData = data.filter(item=>item._id !== id);
+                  setData(newData)
+                  Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                  });
+                }
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "try again ",
+                   
+                });
+              });
+          }
+        });
+      };
     return (
         <div>
             <MainNav/>
@@ -24,7 +63,7 @@ const Pending = () => {
                     <div key={ind} className='lg:flex justify-between  items-center gap-x-4 mt-10 '>
                        
                       <div className=' lg:flex items-center gap-x-3'>
-                        <button className='p-3 rounded-full bg-[#444444] text-white'>
+                        <button onClick={()=>deletOrder(item._id)} className='p-3 rounded-full bg-[#444444] text-white'>
                         <ImCross />
                         </button>
                         <img src={item.img} className='w-[200px] border-2 border-[#444444] rounded-md' alt="" />

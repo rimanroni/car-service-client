@@ -73,7 +73,9 @@ const router = createBrowserRouter([
     },
     {
         path:"/order",
-        element:<Order/>
+        element:<PrivetRouter>
+            <Order/>
+        </PrivetRouter>
     },
     {
         path:"/pendingOrder", 

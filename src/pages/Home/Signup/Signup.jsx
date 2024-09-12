@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { MdPassword } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialAuth from '../SocialAuth/SocialAuth';
 import MainNav from '../../shared/Navbar/MainNav';
 import { myContaxt } from '../../../contaxt/Contaxt';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
     const [type, setType] = useState(false);
     const {createUser } = useContext(myContaxt);
-    
+    const location = useLocation();
+    const navigate = useNavigate()
     const handleType = () =>{
         setType(!type)
     }
@@ -20,11 +22,26 @@ const Signup = () => {
         const password = form.password.value;
         createUser(email, password)
         .then(res=>{
-          alert('create user ')
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Sign Up   Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+            
+          });
+          form.reset();
+          navigate(location?.state ? location?.state : '/')
+          
         })
         .catch(erro=>{
-          alert('invalid try again')
-          console.log(erro);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+      
+          });
+          
         })
     }
     return (

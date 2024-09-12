@@ -3,12 +3,13 @@ import { Link, NavLink } from "react-router-dom";
 import { myContaxt } from "../../../contaxt/Contaxt";
 import { auth } from "../../../FirebaseConfig";
 import { signOut } from "firebase/auth";
+import Swal from "sweetalert2";
 
  
 
 const MainNav = () => {
     const {user  } = useContext(myContaxt);
-    console.log(user);
+  
     const navItems = [
         {title:'Home',link:"/"},
         {title:'About',link:"/about"},
@@ -19,7 +20,14 @@ const MainNav = () => {
      const handleLogout = () =>{
         signOut(auth).then(() => {
             // 
-            alert('Sign-out successful.')
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Sign-out successful.",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            
           }).catch((error) => {
             // 
             alert('An error happened.')

@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
  
-import { Navigate } from 'react-router-dom';
+import { Navigate , useLocation} from 'react-router-dom';
 import { myContaxt } from '../contaxt/Contaxt';
 
 const PrivetRouter = ({children}) => {
-    const {user,  loading} = useContext(myContaxt)
+    const {user,  loading} = useContext(myContaxt);
+    const location = useLocation();
+    console.log(location);
      if(loading) {
          return <div className='h-screen flex items-center justify-center'>Loading...</div>
      }
@@ -13,7 +15,7 @@ const PrivetRouter = ({children}) => {
      }
     return (
         <div>
-            <Navigate to={'/login'}></Navigate>
+            <Navigate state={location.pathname} to={'/login'} replace></Navigate>
         </div>
     );
 };
